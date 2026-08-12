@@ -5,6 +5,6 @@ Matlab code for "Parallel consensus optimization for high-accuracy and robust le
 
 **doi:**   https://doi.org/10.1364/OL.597012
 
-![image](https://github.com/THUHoloLab/Parallel-consensus-optimization-phase-retrieval/blob/main/figure1.pdf)
+![pdf](https://github.com/THUHoloLab/Parallel-consensus-optimization-phase-retrieval/blob/main/figure1.pdf)
 
 ![image](https://github.com/THUHoloLab/Parallel-consensus-optimization-phase-retrieval/blob/main/%E5%9B%BE2_20260226.png)
