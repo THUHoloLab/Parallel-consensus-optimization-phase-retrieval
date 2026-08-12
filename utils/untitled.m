@@ -1,0 +1,39 @@
+
+load '../x_est_Phase_Ours.mat' x
+
+
+% disp('Please select the modulation area ...')
+% figure
+% [temp,rect_aoi] = imcrop(angle(gather(x)));
+% if rem(size(temp,1),2) == 1
+%     rect_aoi(4) = rect_aoi(4) - 1;
+% end
+% if rem(size(temp,2),2) == 1
+%     rect_aoi(3) = rect_aoi(3) - 1;
+% end
+% close
+% disp('Selected.')
+% AngleX = imcrop(angle(gather(x)),rect_aoi);
+AngleX = angle(gather(x));
+AngleX = AngleX(100+1:end-100, 100+1:end-100);
+% phase1=DCTJBG(AngleX);
+% figure
+% imagesc(phase1)
+
+[c,Iout]=zernike_fit80(AngleX,ones(size(AngleX)));
+
+figure
+subplot(131)
+imagesc(AngleX)
+subplot(132)
+imagesc(Iout)
+subplot(133)
+imagesc(AngleX-(Iout));colormap(sinebow(256))
+
+obj  = abs(x(100+1:end-100, 100+1:end-100)).*exp(1j*(AngleX-Iout));
+
+wavefront = (propagate(obj,7,params.pxsize,params.wavlen));
+% wavefront = mask;
+amp_max = prctile(abs(wavefront(:)),99.9);
+figure,imshow(abs(wavefront),[0,1],'border','tight')
+figure,imshow(angle(wavefront),[],'border','tight');colormap(sinebow(256))
